@@ -1,0 +1,99 @@
+{
+  "name": "Cron and Manual Test Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger-node-1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "cron-trigger-node-1",
+      "name": "Cron Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://host.docker.internal:8000/actions/factorial",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\"number\": 5}"
+      },
+      "id": "http-request-node-1",
+      "name": "Factorial HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        220,
+        80
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "manual-trigger-node-1": {
+      "main": [
+        [
+          {
+            "node": "http-request-node-1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cron-trigger-node-1": {
+      "main": [
+        [
+          {
+            "node": "http-request-node-1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Factorial HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron Trigger": {
+      "main": [
+        [
+          {
+            "node": "Factorial HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "versionId": "b3a51930-9517-40bb-b11c-bbb7c5216fb9",
+  "meta": {
+    "instanceId": "558d88703fb65b2d0e44613bc35916258b0f0bf983c5d4730c00c424b77ca36a"
+  },
+  "id": "Tjax1KKWtwwu9tXa",
+  "tags": []
+}
