@@ -1,0 +1,15 @@
+{% from "argument.j2" import render_argument %}
+{% from "option.j2" import render_option %}
+
+def {{ function_name }}(
+    {%- for argument in arguments %}
+    {{ render_argument(argument) }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+    {%- for option in options %}
+    {{ render_option(option) }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+):
+    """
+    {{ docstring }}
+    """
+    pass

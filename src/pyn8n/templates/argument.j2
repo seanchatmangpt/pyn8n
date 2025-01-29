@@ -1,0 +1,13 @@
+{% macro render_argument(ctx) -%}
+{{ ctx.name }}: Annotated[
+    {{ ctx.type }},
+    typer.Argument(
+        {% if ctx.help %}
+        help="{{ ctx.help }}",
+        {% endif %}
+        {% if ctx.rich_help_panel %}
+        rich_help_panel="{{ ctx.rich_help_panel }}",
+        {% endif %}
+    )
+]{% if ctx.default is not none %} = {{ ctx.default }}{% endif %}
+{%- endmacro %}

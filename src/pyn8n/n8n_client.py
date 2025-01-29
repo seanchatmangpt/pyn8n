@@ -501,6 +501,7 @@ class N8nClient:
 # ---------------------------
 
 async def main():
+    api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZjdkNmM1Zi1iMTBhLTQwOGYtOTdjOS05ZjEzNWRmY2QxNzkiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzM2ODM5OTI5fQ.jDr4jghwLHLJAGiVVxKtsQD07R3BHpXukSLNgcaldeE"
     client = N8nClient(
         base_url="http://localhost:5678/api/v1",
         api_key=api_key,

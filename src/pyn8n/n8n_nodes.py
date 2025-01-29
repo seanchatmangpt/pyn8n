@@ -35,3 +35,18 @@ def factorial(body: FactorialInput) -> FactorialOutput:
     print(f"{factorial.__name__}: Factorial of {body.number} is {result}")
     return FactorialOutput(result=result)
 
+
+class TTSInput(BaseModel):
+    text: str = Field(..., description="The text to be spoken")
+
+class TTSOutput(BaseModel):
+    ...
+
+@n8n_node(input_model=TTSInput, output_model=TTSOutput)
+def text_to_speech(body: TTSInput) -> TTSOutput:
+    """Convert text to speech."""
+    import pyttsx3
+    engine = pyttsx3.init()
+    engine.say(body.text)
+    engine.runAndWait()
+    return TTSOutput()

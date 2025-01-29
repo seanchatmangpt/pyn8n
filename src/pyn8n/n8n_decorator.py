@@ -34,7 +34,7 @@ def n8n_node(
             "output_model": output_model,
         }
 
-        # print(f"Registered n8n node: {action_name}")
+        print(f"Registered n8n node: {action_name}")
 
         # Define a FastAPI endpoint for the node
         @router.post(f"/{action_name}", response_model=output_model)

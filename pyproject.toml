@@ -30,6 +30,7 @@ pydantic-ai = {extras = ["logfire"], version = "^0.0.14"}
 dspy-ai = "^2.5.43"
 cloudpickle = "^3.1.0"
 dslmodel = "^2024.12.22.2"
+pyttsx3 = "^2.98"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
 coverage = { extras = ["toml"], version = ">=7.4.4" }

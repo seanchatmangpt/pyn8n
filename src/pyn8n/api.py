@@ -29,8 +29,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     coloredlogs.install()
 
     # print(n8n_router.routes)
-    # for route in app.routes:
-    #     print(f"Route path: {route.path}, methods: {route.methods}")
+    for route in app.routes:
+        print(f"Route path: {route.path}, methods: {route.methods}")
     yield
     # Shutdown events.
 
@@ -47,7 +47,7 @@ app.add_middleware(
 )
 
 # Include the n8n router
-app.include_router(n8n_router, prefix="/actions")
+app.include_router(n8n_router, prefix="/nodes")
 
 
 @app.get("/compute")
@@ -114,3 +114,10 @@ async def voice_endpoint(payload: VoicePayload):
     resp = await VoiceResponse.from_prompt(prompt, model="groq:llama3-groq-8b-8192-tool-use-preview")
     print(f"Response: {resp}")
     return resp
+
+
+# Add the main entry point
+if __name__ == "__main__":
+    import uvicorn  # Import Uvicorn to run the app
+
+    uvicorn.run("pyn8n.api:app", host="0.0.0.0", port=8000, reload=True)

@@ -1,0 +1,19 @@
+{% macro render_option(ctx) -%}
+{{ ctx.name }}: Annotated[
+    {{ ctx.type }},
+    typer.Option(
+        {% if ctx.prompt is not none %}
+        prompt={{ "true" if ctx.prompt is true else '"' ~ ctx.prompt ~ '"' }},
+        {% endif %}
+        {% if ctx.help %}
+        help="{{ ctx.help }}",
+        {% endif %}
+        {% if ctx.rich_help_panel %}
+        rich_help_panel="{{ ctx.rich_help_panel }}",
+        {% endif %}
+        {% if ctx.show_default is not none %}
+        show_default={{ "true" if ctx.show_default else "false" }},
+        {% endif %}
+    )
+]{% if ctx.default is not none %} = {{ ctx.default }}{% endif %}
+{%- endmacro %}
